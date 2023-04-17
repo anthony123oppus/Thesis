@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       
+        <script>
+
+            setInterval(() => {
+                
+            
+                //created a new XMLHttpRequest Object
+            var xhr = new XMLHttpRequest();
+            // On Changing the request State
+            xhr.onreadystatechange = function()
+            {
+                if(this.readyState==4 && this.status==200) //if state is=4(response received) and status=200 (no errors)
+                {		
+        
+                    
+                    var fetched = JSON.parse(xhr.responseText); // parse json file to object 
+                    document.getElementById("raindrops_value").innerHTML="<p>"+fetched.feeds[0].field4+" mm"; // to get rain drops
+        
+                    /********************************* Printing of Temperature *********************************/
+                    document.getElementById("temperature_value").innerHTML="<p>"+fetched.feeds[0].field1+" C";
+                    /********************************* Printing of Humidity *********************************/ 	
+                    document.getElementById("humidity_value").innerHTML="<p>"+fetched.feeds[0].field2+" %";
+                    /********************************* Printing of wind speed *********************************/
+                    document.getElementById("windspeed_value").innerHTML="<p>"+fetched.feeds[0].field3+" m/s";
+                    /********************************* Printing of total rain *********************************/
+                    document.getElementById("totalrain_value").innerHTML="<p>"+fetched.feeds[0].field5+" mm";
+        
+                    
+                    var temperature = parseFloat(fetched.feeds[0].field1);
+                    var humidity = parseFloat(fetched.feeds[0].field2);
+                    var wind_speed = parseFloat(fetched.feeds[0].field3);
+                    var raindrops = parseFloat(fetched.feeds[0].field4);
+                    var total_raindrops = parseFloat(fetched.feeds[0].field5);
+
+                    var totalraindrops_holder = document.getElementById("totalraindrops_holder");
+                    var totalraindrops_status = document.getElementById("totalraindrops_status");
+                    var totalraindrops_img = document.getElementById("totalraindrops_img");
+        
+                    var raindrops_holder = document.getElementById("raindrops_holder");
+                    var raindrops_status = document.getElementById("raindrops_status");
+                    var raindrops_img = document.getElementById("raindrops_img");
+        
+                    var status_container = document.getElementById("status_holder");
+                    var status = document.getElementById("current_status");
+                    var aluf = document.getElementById("temperature_img");
+        
+                    var humidity_holder = document.getElementById("humidity_holder");
+                    var humidity_status = document.getElementById("humidity_status");
+                    var humidity_img = document.getElementById("humidity_img");
+        
+                    var wind_holder = document.getElementById("wind_holder");
+                     var wind_status = document.getElementById("wind_status");
+                     var wind_img = document.getElementById("wind_img");
+        
+                     
+                     /*  total Rain drops 12 hours statuses */ 
+                     if(total_raindrops<=0)
+                     {
+                         totalraindrops_status.innerHTML="No Rain";
+                         totalraindrops_holder.style.backgroundColor="#87ceeb";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }	
+                     else if(total_raindrops<=2 && total_raindrops>=0.1)
+                     {
+                         totalraindrops_status.innerHTML="Weak Rain";
+                         totalraindrops_holder.style.backgroundColor="#009900";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(total_raindrops<=6 && total_raindrops>=2.1)
+                     {
+                         totalraindrops_status.innerHTML="Moderate Rain";
+                         totalraindrops_holder.style.backgroundColor="#8ab92d";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(total_raindrops<=10 && total_raindrops>=6.1)
+                     {
+                         totalraindrops_status.innerHTML="Heavy Rain";
+                         totalraindrops_holder.style.backgroundColor="#ffff1a";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(total_raindrops<=18 && total_raindrops>=10.1)
+                     {
+                         totalraindrops_status.innerHTML="Extreme Rain";
+                         totalraindrops_holder.style.backgroundColor="#ffa500";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(total_raindrops<=30 && total_raindrops>=18.1)
+                     {
+                         totalraindrops_status.innerHTML="Shower";
+                         totalraindrops_holder.style.backgroundColor="#ff0000";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(total_raindrops>=30)
+                     {
+                         totalraindrops_status.innerHTML="CloudBurst";
+                         totalraindrops_holder.style.backgroundColor="#ca1cca";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else
+                     {
+                         totalraindrops_status.innerHTML="------";
+                         totalraindrops_holder.style.backgroundColor="white";
+                        totalraindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+        
+
+                    /* Rain drops statuses */ 
+                    if(raindrops<=0)
+                     {
+                         raindrops_status.innerHTML="No Rain";
+                         raindrops_holder.style.backgroundColor="#87ceeb";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }	
+                     else if(raindrops<=2 && raindrops>=0.1)
+                     {
+                         raindrops_status.innerHTML="Weak Rain";
+                         raindrops_holder.style.backgroundColor="#009900";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(raindrops<=6 && raindrops>=2.1)
+                     {
+                         raindrops_status.innerHTML="Moderate Rain";
+                         raindrops_holder.style.backgroundColor="#8ab92d";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(raindrops<=10 && raindrops>=6.1)
+                     {
+                         raindrops_status.innerHTML="Heavy Rain";
+                         raindrops_holder.style.backgroundColor="#ffff1a";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(raindrops<=18 && raindrops>=10.1)
+                     {
+                         raindrops_status.innerHTML="Extreme Rain";
+                         raindrops_holder.style.backgroundColor="#ffa500";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(raindrops<=30 && raindrops>=18.1)
+                     {
+                         raindrops_status.innerHTML="Shower";
+                         raindrops_holder.style.backgroundColor="#ff0000";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(raindrops>=30)
+                     {
+                         raindrops_status.innerHTML="CloudBurst";
+                         raindrops_holder.style.backgroundColor="#ca1cca";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else
+                     {
+                         raindrops_status.innerHTML="------";
+                         raindrops_holder.style.backgroundColor="white";
+                        raindrops_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+        
+                    /* wind speed statuses */ 
+                    if(wind_speed<=0.2 && wind_speed>=0)
+                     {
+                         wind_status.innerHTML="calm";
+                         wind_holder.style.backgroundColor="#a6a6a6";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }	
+                     else if(wind_speed<=1.5 && wind_speed>=0.3)
+                     {
+                         wind_status.innerHTML="Light Air";
+                         wind_holder.style.backgroundColor="#309db9";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=3.3 && wind_speed>=1.6)
+                     {
+                         wind_status.innerHTML="Light Breeze";
+                         wind_holder.style.backgroundColor="#3868bf";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=5.4 && wind_speed>=3.4)
+                     {
+                         wind_status.innerHTML="Gentle Breeze";
+                         wind_holder.style.backgroundColor="#565ac5";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=7.9 && wind_speed>=5.5)
+                     {
+                         wind_status.innerHTML="Moderate Breeze";
+                         wind_holder.style.backgroundColor="#28628d";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=10.7 && wind_speed>=8.0)
+                     {
+                         wind_status.innerHTML="Fresh Breeze";
+                         wind_holder.style.backgroundColor="#007770";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=13.8 && wind_speed>=10.8)
+                     {
+                         wind_status.innerHTML="Strong Breeze";
+                         wind_holder.style.backgroundColor="#00997a";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=17.1 && wind_speed>=13.9)
+                     {
+                         wind_status.innerHTML="Near Gale";
+                         wind_holder.style.backgroundColor="#00ae68";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=20.7 && wind_speed>=17.2)
+                     {
+                         wind_status.innerHTML="Gale";
+                         wind_holder.style.backgroundColor="#a8c944";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=24.4 && wind_speed>=20.8)
+                     {
+                         wind_status.innerHTML="Severe Gale";
+                         wind_holder.style.backgroundColor="#c8420d";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=28.4 && wind_speed>=24.5)
+                     {
+                         wind_status.innerHTML="Strong Storm";
+                         wind_holder.style.backgroundColor="#d70032";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed<=32.4 && wind_speed>=28.5)
+                     {
+                         wind_status.innerHTML="Voilent Storm";
+                         wind_holder.style.backgroundColor="#af5088";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else if(wind_speed>=32.5 )
+                     {
+                         wind_status.innerHTML="Hurricane";
+                         wind_holder.style.backgroundColor="#9a3097";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else
+                     {
+                        wind_status.innerHTML="------";
+                        wind_holder.style.backgroundColor="white";
+                        wind_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+        
+                     /*humidity Statuses */
+                     if(humidity<=39 && humidity>=0)
+                     {
+                         humidity_status.innerHTML="Dry";
+                         humidity_holder.style.backgroundColor="#af1c1c";
+                        humidity_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }	
+                     else if(humidity>=39.01 && humidity<=60)
+                     {
+                         humidity_status.innerHTML="Optimum";
+                         humidity_holder.style.backgroundColor="#066820";
+                        humidity_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+                     else
+                     {
+                         humidity_status.innerHTML="Moist";
+                         humidity_holder.style.backgroundColor="#061b68";
+                        humidity_img.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                     }
+        
+                    /*Temperature Statuses */
+                    if(temperature<=-45.01)
+                    {
+                        status.innerHTML="Unearthly Cold";
+                        status_container.style.backgroundColor="#003489";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    
+                    }
+                    else if(temperature>=-45 && temperature<=-30.01)
+                    {
+                        status.innerHTML="Extremely Cold";
+                        status_container.style.backgroundColor="#807ae8";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature>=-30 && temperature<=-15.01)
+                    {
+                        status.innerHTML="Severe Cold";
+                        status_container.style.backgroundColor="#6d69bf";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature>=-15 && temperature<=5)
+                    {
+                        status.innerHTML="Cold";
+                        status_container.style.backgroundColor="#bab8f2";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature<=15 && temperature>=5.01)
+                    {
+                        status.innerHTML="Moderate";
+                        status_container.style.backgroundColor="#69db57";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature<=30 && temperature>=15.01)
+                    {
+                        status.innerHTML="Warm";
+                        status_container.style.backgroundColor="#dbb757";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature<=40 && temperature>=30.01)
+                    {
+                        status.innerHTML="Hot";
+                        status_container.style.backgroundColor="#f95d36";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature<=60 && temperature>=40.01)
+                    {
+                        status.innerHTML="Severe Hot";
+                        status_container.style.backgroundColor="#ec1839";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature<=80 && temperature>=60.01)
+                    {
+                        status.innerHTML="Extreme Heat";
+                        status_container.style.backgroundColor="#8e1b09";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else if(temperature<=100 && temperature>=80.01)
+                    {
+                        status.innerHTML="Unearthly Heat";
+                        status_container.style.backgroundColor="#3f0e0e";
+                        status_container.style.color="white";
+                        aluf.innerHTML="<img src='assets/images/rainy.gif\' width=\'500px\' height=\'500px\'>";
+                    }
+                    else
+                    {
+                        status.innerHTML="--"
+                        status_container.style.backgroundColor="white";
+                    }
+                   
+                }
+        
+            }
+            
+            /***************************** Fetch Request to thingspeak ***************************/
+            xhr.open("GET","https://api.thingspeak.com/channels/1916969/feeds.json?api_key=X3FGXGKKVU0UR6OG&results=1",true);
+            /***************************** Sending of Fetch Request to thingspeak ***************************/
+            xhr.send();
+        
+        }, 200);
+        </script>
+
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Weather Analysis</title>
+        <meta name="description" content="Anthony">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="assets/images/unnamed.png">
+
+        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/fontAwesome.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/hero-slider.css">
+        <link rel="stylesheet" href="assets/css/weather_graph.css">
+        <link rel="stylesheet" href="assets/css/graph.css">
+        <link rel="stylesheet" href="assets/css/owl-carousel.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+        <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+<body>
+
+      <!-- ***** Preloader Start ***** -->
+            <div id="js-preloader" class="js-preloader">
+                <div class="preloader-inner">
+                <span class="dot"></span>
+                <div class="dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                </div>
+            </div>
+        <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo7.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="weather.html">Weather</a></li>
+                        <li><a href="weather_graph.html" class="active">Weather Graph</a></li>
+                        <!-- <li><a href="create.html">Create Yours</a></li> -->
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+    <div class="fixed-side-navbar wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.5s">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#home"><span>Intro</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#rain_count"><span>Rain drops</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#temperature"><span>Temperature</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#humidity"><span>Humidity</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#wind_speed"><span>Wind Speed</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#total_rain"><span>Total Rain</span></a></li>
+        </ul>
+    </div>
+
+
+    <div class="parallax-content baner-content" id="home">
+        <div class="container">
+            <div class="first-content header-text wow fadeIn" data-wow-duration=".8s" data-wow-delay="0.5s">
+                <h1><span class="weather">W</span><span class="eather">EATHER</span></h1>
+                <span><em>BISU-Bilar</em> v1.1.0 </span>
+                <div class="primary-button">
+                    <a href="Data.html">Google Sheet Data</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="service-content" id="rain_count">
+        <div class="container">
+            <div class="row" style="text-align:center;">
+                <div class="status col-md-12" id="raindrops">
+                    <div class="first wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <h1 class="weather-status">Rain Drops</h1>
+                        <hr/>
+                        <hr/> 
+                        <div id="raindrops_img"><img src="assets/images/load.gif" alt=""></div>
+                        <div class="firstA" id="raindrops_holder"><h1 id="raindrops_status"></h1></div>
+                    </div>
+                </div>
+
+            
+                    <div class="col-md-6 wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="second">
+                            <h1 class="secondB">Rain Drops Count</h1>
+                            <div class="data" id="raindrops_value">
+                            <img class="gif" src="assets/images/load.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="thire">
+                            <h1 class="thireC">Raindrops Graph</h1>
+                            <div>
+                            <iframe width="480" height="260" style="border:none;box-shadow:1px 1px 10px 0px black;" src="https://thingspeak.com/channels/1916969/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="temperature-content" id="temperature">
+        <div class="container">
+            <div class="row" style="text-align:center;">
+                <div class="status col-md-12">
+                    <div class="first wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <h1 class="weather-status">Temperature</h1>
+                        <hr/>
+                        <hr/>
+                        <div id="temperature_img"> <img src="assets/images/load.gif" alt=""></div>
+                        <div class="firstA" id="status_holder"><h1 id="current_status"></h1></div>
+                    </div>
+                </div>
+
+            
+                    <div class="col-md-6 wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="second">
+                            <h1 class="secondB">Temperature Analysis</h1>
+                            <div class="data" id="temperature_value">
+                                <img class="gif" src="assets/images/load.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="thire">
+                            <h1 class="thireC">Temperature Graph</h1>
+                            <div>
+                            <iframe width="480" height="260" style="border:none;box-shadow:1px 1px 10px 0px black;" src="https://thingspeak.com/channels/1916969/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="tabs-content" id="humidity">
+        <div class="container">
+            <div class="row" style="text-align:center;">
+                <div class="status col-md-12">
+                    <div class="first wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <h1 class="weather-status">Humidity</h1>
+                        <hr/>
+                        <hr/>
+                        <div id="humidity_img"> <img src="assets/images/load.gif" alt=""></div>
+                        <div class="firstA" id="humidity_holder"><h1 id="humidity_status"></h1></div>
+                    </div>
+                </div>
+
+            
+                    <div class="col-md-6 wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="second">
+                            <h1 class="secondB">Humidity Analysis</h1>
+                            <div class="data" id="humidity_value">
+                                <img class="gif" src="assets/images/load.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="thire">
+                            <h1 class="thireC">Humidity Graph</h1>
+                            <div>
+                            <iframe width="480" height="260" style="border:none;box-shadow:1px 1px 10px 0px black;" src="https://thingspeak.com/channels/1916969/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="parallax-content contact-content" id="wind_speed">
+        <div class="container">
+            <div class="row" style="text-align:center;">
+                <div class="status col-md-12">
+                    <div class="first wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <h1 class="weather-status">Wind Speed</h1>
+                        <hr/>
+                        <hr/>
+                        <div id="wind_img"> <img src="assets/images/load.gif" alt=""></div>
+                        <div class="firstA" id="wind_holder"><h1 id="wind_status"></h1></div>
+                    </div>
+                </div>
+
+            
+                    <div class="col-md-6 wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="second">
+                            <h1 class="secondB">Wind Speed Analysis</h1>
+                            <div class="data" id="windspeed_value">
+                            <img class="gif" src="assets/images/load.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="thire">
+                            <h1 class="thireC">Wind Speed Graph</h1>
+                            <div>
+                            <iframe width="480" height="260" style="border:none;box-shadow:1px 1px 10px 0px black;" src="https://thingspeak.com/channels/1916969/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rain-content" id="total_rain">
+        <div class="container">
+            <div class="row" style="text-align:center;">
+                <div class="status col-md-12">
+                    <div class="first wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <h1 class="weather-status">Total Rain Drops</h1>
+                        <hr/>
+                        <hr/>
+                        <div id="totalraindrops_img"> <img src="assets/images/load.gif" alt=""></div>
+                        <div class="firstA" id="totalraindrops_holder"><h1 id="totalraindrops_status"></h1></div>
+                    </div>
+                </div>
+
+            
+                    <div class="col-md-6 wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="second">
+                            <h1 class="secondB">Total Raindrops Analysis</h1>
+                            <div class="data" id="totalrain_value">
+                            <img class="gif" src="assets/images/load.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                        <div class="thire">
+                            <h1 class="thireC">Total Raindrops graph</h1>
+                            <div>
+                            <iframe width="480" height="260" style="border:none;box-shadow:1px 1px 10px 0px black;" src="https://thingspeak.com/channels/1916969/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+            <div class="col-lg-12">
+              <p>Copyright © 2023 <a href="#">DAMM Group</a> Weather Monitoring System using Arduino. All rights reserved.
+              &nbsp;&nbsp;
+              Designed by <a title="HTML CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">Encoder</a></p>
+            </div>
+      </footer>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="vendor/jquery/jquery.min.js"><\/script>')</script>
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/animation.js"></script>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/popup.js"></script>
+
+    <script>
+        $(document).ready(function(){
+          // Add smooth scrolling to all links
+          $(".fixed-side-navbar a, .primary-button a").on('click', function(event) {
+
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+              // Prevent default anchor click behavior
+              event.preventDefault();
+
+              // Store hash
+              var hash = this.hash;
+
+              // Using jQuery's animate() method to add smooth page scroll
+              // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+              $('html, body').animate({
+                scrollTop: $(hash).offset().top
+              }, 300, function(){
+           
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+              });
+            } // End if
+          });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900");
+@import url('https://fonts.googleapis.com/css2?family=Asul:wght@400;700&display=swap');
+
+body
+{
+    background: url('../images/bg-1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container
+{
+    padding-bottom: 100px;
+}
+html{
+    scroll-behavior: smooth;
+}
+.container .column
+{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: gray;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.container .column button{
+    
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.container_head
+{
+    padding-top: 5px;
+    background: white;
+    /* border-radius: 20px; */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 15px 15px;
+    color:red;
+}
+/* .container_head h1
+{
+    background: white;
+    border-radius: 20px;
+    padding: 15px 15px;
+    color:red;
+} */
+
+.first{
+    padding: 35px;
+    margin-bottom: 24px;
+    box-shadow: 2px 2px 3px black;
+    background: rgba(24,24,27,0.6);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+    backdrop-filter: blur(5px);
+}
+.first img
+{
+    max-height:450px;
+    max-width: 450px;
+}
+.weather-status
+{
+    color:blue;
+    font-size: 40px;
+}
+.first-content .weather{
+    font-family: 'Dancing Script', cursive;
+    font-size: 200px;
+    font-style: italic;
+    margin-right: 10px;
+    font-weight: 500;
+}
+.first-content .eather{
+    font-family: 'Asul', cursive;
+    font-size: 100px;
+    font-weight: 400;
+}
+.firstA{
+    color: #fff;
+    background: green;
+    border-radius: 100px;
+    height: 50px;
+    padding: 5px 15px;
+    text-align: center;
+}
+.firstA h1{
+    font-family: 'Asul', cursive;
+    font-size: 35px;
+}
+.second{
+    padding: 20px;
+    background-color: skyblue;
+    margin-bottom: 24px;
+    height: 349px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px black;
+}
+.secondB{
+    color: #fff;
+    font-size: 20px;
+    background: green;
+    border-radius: 100px;
+    padding: 5px 15px;
+}
+.second .data
+{
+    font-size: 80px;
+    padding-top: 70px;
+}
+.second .data p
+{
+    font-size: 60px;
+    color: black;
+    padding-top: 70px;
+}
+.second .data img
+{
+    width: 200px;
+    height: 200px;
+}
+.thire{
+    padding: 20px;
+    background-color: #2acd72;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px black;
+}
+.thireC{
+    color: #fff;
+    font-size: 20px;
+    background: green;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    text-align: center;
+}
+
+#progress
+{
+    float: left;
+    background-color: #03cc65;
+    position: fixed;
+    margin-right: 50px;
+    margin-bottom: 30px;
+    bottom: 20px;
+    right: 10px;
+    height: 70px;
+    width: 70px;
+    display: none;
+    place-items: center;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0,0.2);
+    cursor: pointer;
+}
+#progress i
+{
+    font-size: 30px;
+    color: red;
+}
+#progress i:hover{
+    color: #03cc65;
+}
+
+
+#progress-value{
+    display: block;
+    height: calc(100% - 15px);
+    width: calc(100% - 15px);
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 35px;
+    color: #001a2e;
+}
+
+@media (max-width:550px)
+{
+    #progress{
+        height: 50px;
+        width: 50px;
+        margin-right: 10px;
+    }
+    #progress i:hover{
+        color: #03cc65;
+    }
+    .first-content .weather{
+        font-size: 100px;
+        font-weight: 200;
+    }
+    .first-content .eather{
+        font-size: 40px;
+        font-weight: 100;
+    }
+}
+
+@media (max-width:1200px)
+{
+    .thire iframe
+    {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width:770px)
+{
+    .container
+    {
+        padding-bottom: 40px;
+    }
+    .first img
+    {
+        flex: 0 0 90%;
+        max-width: 90%;
+        max-height: 300px;
+    }
+    .thire iframe
+    {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    /* .home .home-info
+    {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+     */
+}

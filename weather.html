@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+
+setInterval(() => {
+		//created a new XMLHttpRequest Object
+	var xhr = new XMLHttpRequest();
+	// On Changing the request State
+	xhr.onreadystatechange = function()
+	{
+		if(this.readyState==4 && this.status==200) //if state is=4(response received) and status=200 (no errors)
+		{		
+
+			
+			var fetched = JSON.parse(xhr.responseText); // parse json file to object 
+			document.getElementById("raindrops_value").innerHTML="<p>"+fetched.feeds[0].field4+" mm"; // to get air quality
+
+			/********************************* Printing of Temperature *********************************/
+			document.getElementById("temperature_value").innerHTML="<p>"+fetched.feeds[0].field1+" C";
+			/********************************* Printing of Humidity *********************************/ 	
+			document.getElementById("humidity_value").innerHTML="<p>"+fetched.feeds[0].field2+" %";
+            /********************************* Printing of Pressure *********************************/
+            document.getElementById("wind_value").innerHTML="<p>"+fetched.feeds[0].field3+" m/s";
+
+            var fetched = JSON.parse(xhr.responseText); // parse json file to object 
+			document.getElementById("Rain_drops").innerHTML="<p>"+fetched.feeds[0].field4+" mm"; // to get air quality
+
+			/********************************* Printing of Temperature *********************************/
+			document.getElementById("temperatur_value").innerHTML="<p>"+fetched.feeds[0].field1+" C";
+			/********************************* Printing of Humidity *********************************/ 	
+			document.getElementById("humidit_value").innerHTML="<p>"+fetched.feeds[0].field2+" %";
+            /********************************* Printing of Pressure *********************************/
+            document.getElementById("wind_speed").innerHTML="<p>"+fetched.feeds[0].field3+" m/s";
+
+            var raindrops = parseFloat(fetched.feeds[0].field4);
+            var temperature = parseFloat(fetched.feeds[0].field1);
+            var humidity = parseFloat(fetched.feeds[0].field2);
+            var wind_speed = parseFloat(fetched.feeds[0].field3);
+
+            var raindrops_holder = document.getElementById("raindrops_holder");
+            var raindrops_status = document.getElementById("raindrops_status");
+		    var raindrops_img = document.getElementById("raindrops_img");
+
+            var status_container = document.getElementById("holder");
+            var status = document.getElementById("current");
+		    var aluf = document.getElementById("aham");
+
+            var humidity_holder = document.getElementById("humidity_holder");
+         	var humidity_status = document.getElementById("humidity_status");
+         	var humidity_img = document.getElementById("humidity_img");
+
+            var wind_holder = document.getElementById("wind_holder");
+         	var wind_status = document.getElementById("wind_status");
+         	var wind_img = document.getElementById("wind_img");
+
+             
+            /* Rain drops statuses */ 
+            if(raindrops<=0)
+         	{
+         		raindrops_status.innerHTML="No Rain";
+         		raindrops_holder.style.backgroundColor="#87ceeb";
+         	}	
+         	else if(raindrops<=2 && raindrops>=0.1)
+         	{
+         		raindrops_status.innerHTML="Weak Rain";
+         		raindrops_holder.style.backgroundColor="#009900";
+         	}
+             else if(raindrops<=6 && raindrops>=2.1)
+         	{
+         		raindrops_status.innerHTML="Moderate Rain";
+         		raindrops_holder.style.backgroundColor="#8ab92d";
+         	}
+             else if(raindrops<=10 && raindrops>=6.1)
+         	{
+         		raindrops_status.innerHTML="Heavy Rain";
+         		raindrops_holder.style.backgroundColor="#ffff1a";
+         	}
+             else if(raindrops<=18 && raindrops>=10.1)
+         	{
+         		raindrops_status.innerHTML="Extreme Rain";
+         		raindrops_holder.style.backgroundColor="#ffa500";
+         	}
+             else if(raindrops<=30 && raindrops>=18.1)
+         	{
+         		raindrops_status.innerHTML="Shower";
+         		raindrops_holder.style.backgroundColor="#ff0000";
+         	}
+             else if(raindrops>=30)
+         	{
+         		raindrops_status.innerHTML="CloudBurst";
+         		raindrops_holder.style.backgroundColor="#ca1cca";
+         	}
+             else
+         	{
+         		raindrops_status.innerHTML="------";
+         		raindrops_holder.style.backgroundColor="white";
+         	}
+
+            /* wind speed statuses */ 
+            if(wind_speed<=0.2 && wind_speed>=0)
+         	{
+         		wind_status.innerHTML="calm";
+         		wind_holder.style.backgroundColor="#a6a6a6";
+         	}	
+         	else if(wind_speed<=1.5 && wind_speed>=0.21)
+         	{
+         		wind_status.innerHTML="Light Air";
+         		wind_holder.style.backgroundColor="#309db9";
+         	}
+             else if(wind_speed<=3.3 && wind_speed>=1.51)
+         	{
+         		wind_status.innerHTML="Light Breeze";
+         		wind_holder.style.backgroundColor="#3868bf";
+         	}
+             else if(wind_speed<=5.4 && wind_speed>=3.31)
+         	{
+         		wind_status.innerHTML="Gentle Breeze";
+         		wind_holder.style.backgroundColor="#565ac5";
+         	}
+             else if(wind_speed<=7.9 && wind_speed>=5.41)
+         	{
+         		wind_status.innerHTML="Moderate Breeze";
+         		wind_holder.style.backgroundColor="#28628d";
+         	}
+             else if(wind_speed<=10.7 && wind_speed>=7.91)
+         	{
+         		wind_status.innerHTML="Fresh Breeze";
+         		wind_holder.style.backgroundColor="#007770";
+         	}
+             else if(wind_speed<=13.8 && wind_speed>=10.71)
+         	{
+         		wind_status.innerHTML="Strong Breeze";
+         		wind_holder.style.backgroundColor="#00997a";
+         	}
+             else if(wind_speed<=17.1 && wind_speed>=13.81)
+         	{
+         		wind_status.innerHTML="Near Gale";
+         		wind_holder.style.backgroundColor="#00ae68";
+         	}
+             else if(wind_speed<=20.7 && wind_speed>=17.11)
+         	{
+         		wind_status.innerHTML="Gale";
+         		wind_holder.style.backgroundColor="#a8c944";
+         	}
+             else if(wind_speed<=24.4 && wind_speed>=20.71)
+         	{
+         		wind_status.innerHTML="Severe Gale";
+         		wind_holder.style.backgroundColor="#c8420d";
+         	}
+             else if(wind_speed<=28.4 && wind_speed>=24.41)
+         	{
+         		wind_status.innerHTML="Strong Storm";
+         		wind_holder.style.backgroundColor="#d70032";
+         	}
+             else if(wind_speed<=32.5 && wind_speed>=28.41)
+         	{
+         		wind_status.innerHTML="Voilent Storm";
+         		wind_holder.style.backgroundColor="#af5088";
+         	}
+             else if(wind_speed>=32.51 )
+         	{
+         		wind_status.innerHTML="Hurricane";
+         		wind_holder.style.backgroundColor="#9a3097";
+         	}
+         	else
+         	{
+                wind_status.innerHTML="------";
+                wind_holder.style.backgroundColor="white";
+         	}
+
+             /*humidity Statuses */
+         	if(humidity<=39 && humidity>=0)
+         	{
+         		humidity_status.innerHTML="Dry";
+         		humidity_holder.style.backgroundColor="#af1c1c";
+         	}	
+         	else if(humidity>=39.01 && humidity<=60)
+         	{
+         		humidity_status.innerHTML="Optimum";
+         		humidity_holder.style.backgroundColor="#066820";
+         	}
+         	else
+         	{
+         		humidity_status.innerHTML="Moist";
+         		humidity_holder.style.backgroundColor="#061b68";
+         	}
+
+            /*Temperature Statuses */
+            if(temperature<=-46)
+            {
+            	status.innerHTML="Unearthly Cold";
+            	status_container.style.backgroundColor="#003489";
+			
+            }
+            else if(temperature>=-45 && temperature<=-30.01)
+            {
+            	status.innerHTML="Extremely Cold";
+            	status_container.style.backgroundColor="#807ae8";
+            }
+            else if(temperature>=-30 && temperature<=-15.01)
+            {
+            	status.innerHTML="Severe Cold";
+            	status_container.style.backgroundColor="#6d69bf";
+            }
+            else if(temperature>=-15 && temperature<=5)
+            {
+            	status.innerHTML="Cold";
+            	status_container.style.backgroundColor="#bab8f2";
+            }
+            else if(temperature<=15 && temperature>=5.01)
+            {
+            	status.innerHTML="Moderate";
+            	status_container.style.backgroundColor="#69db57";
+            }
+            else if(temperature<=30 && temperature>=15.01)
+            {
+            	status.innerHTML="Warm";
+            	status_container.style.backgroundColor="#dbb757";
+            }
+            else if(temperature<=40 && temperature>=30.01)
+            {
+            	status.innerHTML="Hot";
+            	status_container.style.backgroundColor="#f95d36";
+            }
+            else if(temperature<=60 && temperature>=40.01)
+            {
+            	status.innerHTML="Severe Hot";
+            	status_container.style.backgroundColor="#ec1839";
+            }
+            else if(temperature<=80 && temperature>=60.01)
+            {
+            	status.innerHTML="Extreme Heat";
+            	status_container.style.backgroundColor="#8e1b09";
+            }
+            else if(temperature<=100 && temperature>=80.01)
+            {
+            	status.innerHTML="Unearthly Heat";
+            	status_container.style.backgroundColor="#3f0e0e";
+            	status_container.style.color="white";
+            }
+            else
+            {
+            	status.innerHTML="--"
+            	status_container.style.backgroundColor="white";
+            }
+		}
+	}
+	/***************************** Fetch Request to thingspeak ***************************/
+	xhr.open("GET","https://api.thingspeak.com/channels/1916969/feeds.json?api_key=X3FGXGKKVU0UR6OG&results=1",true);
+	/***************************** Sending of Fetch Request to thingspeak ***************************/
+	xhr.send();
+
+}, 200);
+
+    </script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/unnamed.png">
+    <link rel="stylesheet" href="assets/css/weatherstyle.css">
+    <link rel="stylesheet" href="assets/css/weather-icons.min.css">
+    <title>BISU-Bilar Weather</title>
+
+
+    <!-- Bootstrap css file -->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+
+    <!-- Bootstrap css file -->
+    <!-- <link rel="stylesheet" href="assets/css/all.min.css"> -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <!-- <link rel="stylesheet" href="assets/css/index.css"> -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/weather-icons.css">
+    <link rel="stylesheet" href="assets/css/weather-icons-wind.css">
+    <script src="//use.typekit.net/hse2lqc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-547519-12', 'erikflowers.github.io');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body class="bgbody">
+
+     <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo7.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="weather.html"  class="active">Weather</a></li>
+                        <li><a href="weather_graph.html">Weather Graph</a></li>
+                        <!-- <li><a href="create.html">Create Yours</a></li> -->
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+     <div class="container">
+        <div class="current-info">
+
+            <div class="date-container header-text">
+                <div class="time" id="time">
+                </div>
+                <div class="date" id="date">
+                    Monday, 24 May
+                </div>
+
+                <div class="others d-none d-lg-block" id="current-weather-items">
+                    <div class="weather-item">
+                        <div><i class="wi wi-thermometer"></i> Temperature</div>
+                        <div id="temperatur_value"></div>
+                    </div>
+                    <div class="weather-item">
+                        <div><i class="wi wi-humidity"></i> Humidity</div>
+                        <div id="humidit_value"></div>
+                    </div>
+                    <div class="weather-item">
+                        <div><i class="wi wi-strong-wind"></i> Wind Speed</div>
+                        <h6 id="wind_speed"></h6>
+                    </div>
+                    <div class="weather-item">
+                        <div><i class="wi wi-raindrop"></i> Raindrop</div>
+                        <h6 id="Rain_drops"></h6>
+                    </div>
+                 </div>
+            </div>
+            <hr>
+            <div class="place-container wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div class="time-zone" id="time-zone">Bohol Island State University</div>
+                <div id="country" class="country">Bilar, Bohol, Philippines</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="future-forecast wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
+        
+        <!-- wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s -->
+            <div class="today" onclick="window.open('weather_graph.html','_self');">
+                <div class="temperature"><i class="wi wi-thermometer"></i></div>
+                <div class="other">
+                    <div class="day">Temperature</div>
+                    <div class="temps" id="temperature_value"></div>
+                    <div class="day" id="holder"><h5 id="current"></h5></div>
+                </div>
+            </div>
+        
+            <!-- wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s -->
+            <div class="today" onclick="window.open('weather_graph.html','_self');">
+                <div class="humidity"><i class="wi wi-humidity"></i></div>
+                <div class="other">
+                    <div class="day">Humidity</div>
+                    <div class="temps" id="humidity_value"></div>
+                    <div class="day" id="humidity_holder"><h5 id="humidity_status"></h5></div>
+                </div>
+            </div>
+
+            <!-- wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s -->
+            <div class="today" onclick="window.open('weather_graph.html','_self');">
+                <i class="wi wi-strong-wind"></i>  
+                <div class="other">
+                    <div class="day">WindSpeed</div>
+                    <div class="temps" id="wind_value"></div>
+                    <div class="day" id="wind_holder"><h5 id="wind_status"></h5></div>
+                </div>
+            </div>
+            
+            <!-- wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s -->
+            <div class="today" onclick="window.open('weather_graph.html','_self');">
+                <div class="rain"><i class="wi wi-raindrop"></i></div>
+                <div class="other">
+                    <div class="day">RainDrops</div>
+                    <div class="temps" id="raindrops_value"></div>
+                    <div class="day" id="raindrops_holder"><h5 id="raindrops_status"></h5></div>
+                </div>
+            </div>
+            
+        </div>
+        <script>
+            setInterval(()=>{
+                const time = document.querySelector("#time");
+                let date = new Date();
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+                let day_night = "AM";
+                if(hours > 12){
+                    day_night = "PM";
+                    hours = hours - 12;
+                }
+                if(hours < 10){
+                    hours = "0" + hours;
+                }
+                if(minutes < 10){
+                    minutes = "0" + minutes;
+                }
+                if(seconds < 10){
+                    seconds = "0" + seconds;
+                }
+
+                time.textContent = hours + ":" + minutes + ":" + seconds + " " +  day_night ;
+            });
+
+
+        </script>
+
+     <!-- Scripts -->
+     <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/typed.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/animation.js"></script>
+    <script src="assets/js/weatherscript.js"></script>
+    <script src="assets/js/vanilla-tilt.min.js"></script>
+    
+
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".others"),{
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare": 1,
+        })
+    </script>
+
+</body>
+</html>

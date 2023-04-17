@@ -1,0 +1,245 @@
+/* import fontstyle */
+@import url(fonts.css);
+@import url('./skins/color-1.css');
+
+
+:root
+{
+    --primary-color: #4458dc;
+    --primary-color2: #854fee;
+    --title-color: #141313;
+    --text-color: #777777;
+    --border-color: #201f1f17;
+    --gradient-color: linear-gradient(90deg, #4458dc 0%, #854fee 100%);
+    --shadow-color: 0px 10px 30px rgba(118, 85, 225, 0.3);
+    --box-shadow: 0px 10px 30px rgba(57, 56, 61, 0.205);
+
+    
+    --bg-black-900: #f2f2fc;
+    --bg-black-100: #fdf9ff;
+    --bg-black-50: #e8dfec;
+    --text-black-900: #302e4d;
+    --text-black-700: #504e70;
+    --bg-color-70: #66ffff;
+    --bg-color-blue: #1a1aff;
+}
+
+/* start navigation */
+.header_area .main-menu{
+    background: var(--bg-color-70);
+    
+}
+
+.header_area .main-menu .navbar .navbar-brand
+{
+    padding: 0 2rem 0 4rem;
+}
+.header_area .main-menu .navbar
+{
+    padding: 1rem .8rem;
+}
+.header_area .main-menu .navbar .design{
+    color: var(--text-black-900);
+    font-weight: 700;
+    padding: 0 10px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    position: relative;
+}
+.header_area .main-menu .navbar .design::before
+{
+    content:'';
+    position: absolute ;
+    width: 20px;
+    height: 20px;
+    border-bottom: 4px solid var(--skin-color);
+    border-left: 4px solid var(--skin-color);
+    bottom: 0;
+    left: 0;
+}
+.header_area .main-menu .navbar .design::after
+{
+    content:'';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-top: 5px solid var(--skin-color);
+    border-right: 5px solid var(--skin-color);
+    top: 0;
+    right: 0;
+}
+.header_area .main-menu .navbar .fa{
+    font-size: 29px;
+    color: var(--bg-color-blue);
+}
+.header_area .main-menu .navbar a span{
+    font-family: 'Clicker Script', cursive;
+    font-size: 29px;
+    color: var(--skin-color);
+}
+.header_area .main-menu .nav-item .nav-link
+{
+    font-family: 'Roboto',cursive;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-black-900);
+    padding-left: 1.7rem;
+}
+.header_area .main-menu .navbar-nav .active a{
+    color: var(--skin-color);
+}
+.header_area .main-menu .navbar-nav a:hover{
+    color: var(--skin-color);
+}
+
+/* end navigation */
+
+
+/* home start */
+.btn-me
+{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 35px;
+    color: white;
+    border-radius: 40px;
+    white-space: nowrap;
+    border: none;
+    background: var(--skin-color);
+    transition: all 0.3s ease;
+}
+.btn-me:hover
+{
+    transform: scale(1.05);
+}
+
+
+/* home*/
+
+.home
+{
+    min-height: 100vh;
+    display: flex;
+    color: var(--text-black-900);
+}
+.home .home-container
+{
+    max-width: 1300px;
+    width: 100%;
+    margin: auto;
+}
+.home .home-row
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+}
+.home .home-info
+{
+    flex: 0 0 60%;
+    max-width:  60%;
+}
+h3 .hello
+{
+    font-size: 28px;
+    margin: 15px 0;
+}
+h3 .hello span
+{
+    font-family: 'Clicker Script' , cursive;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--skin-color);
+}
+h3 .my-profession
+{
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+.home-info p
+{
+    margin-bottom: 70px;
+    font-size: 20px;
+    color: var(--text-black-700);
+}
+.typing
+{
+    color: var(red);
+}
+
+.home-img
+{
+    flex: 0 0 40%;
+    max-width: 40%;
+    text-align: center;
+    position: relative;
+    background: #a6a6a6;
+    border-radius: 450px;
+}
+.home-img::after
+{
+    content: '';
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-bottom: 10px solid var(red);
+    border-right: 10px solid var(red);
+    right: 20px;
+    bottom: -40px;
+}
+.home-img::before
+{
+    content: '';
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-top: 10px solid var(red);
+    border-left: 10px solid var(red);
+    left: -20px;
+    top: -40px;
+}
+.home-img img
+{
+    margin: auto;
+    border-radius: 5px;
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 1s, top 1s;
+}
+.home-img:hover{
+    background-color: rgb(49, 195, 253);
+}
+.home-img:hover .back-img{
+    top: 100px;
+}
+.home-img:hover .main-img{
+    left: 200px;
+}
+
+/* home end */
+
+@media (max-width:600px)
+{
+    .home .home-info
+    {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+}
+@media (max-width:360px)
+{
+    .header_area .main-menu .navbar .navbar-brand
+    {
+        padding-left: 0;
+    }
+  
+}
+
