@@ -708,6 +708,8 @@ Header Style
 
     .place-container .time-zone{
         font-size: 20px;
+        padding-top: 0px;
+        margin-top: 0px;
     }
 
     .current-info .others{
