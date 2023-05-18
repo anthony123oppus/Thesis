@@ -922,15 +922,15 @@ Services Style
 }
 
 .our-services .first-bar span {
-  left: 95%;
+  left: 85%;
 }
 
 .our-services .second-bar span {
-  left: 95%;
+  left: 85%;
 }
 
 .our-services .third-bar span {
-  left: 95%;
+  left: 85%;
 }
 
 .our-services .progress-skill-bar h4 {
@@ -1174,17 +1174,22 @@ responsive
     padding: 0px;
   }
   .about-us .left-image {
-    margin-right: 0px;
+    /* margin-right: 10px; */
     position: absolute;
     bottom: -220px;
-    right: 0;
+    width: 100%;
+    /* right: 0; */
   }
   .about-us .left-image img{
-    height: 300px;
-    width: 300px;
+    height: 290px;
+    width: 90%;
+    padding-left: 27px;
+    /* padding-right: 10px; */
+
   }
   .about-us .left-image .drrmHead{
-    font-size: 15px;
+    font-size: 20px;
+    padding-left: 29px;
   }
   .about-us .services {
     text-align: center;
