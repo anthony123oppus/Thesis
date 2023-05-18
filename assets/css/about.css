@@ -922,15 +922,15 @@ Services Style
 }
 
 .our-services .first-bar span {
-  left: 85%;
+  left: 90%;
 }
 
 .our-services .second-bar span {
-  left: 85%;
+  left: 90%;
 }
 
 .our-services .third-bar span {
-  left: 85%;
+  left: 90%;
 }
 
 .our-services .progress-skill-bar h4 {
@@ -1215,6 +1215,17 @@ responsive
   .our-services .section-heading p {
     margin-right: 0px;
     text-align: center;
+  }
+  .our-services .first-bar span {
+    left: 85%;
+  }
+  
+  .our-services .second-bar span {
+    left: 85%;
+  }
+  
+  .our-services .third-bar span {
+    left: 85%;
   }
   .our-portfolio .section-heading h2 {
     margin: 0px 0px 80px 0px;
